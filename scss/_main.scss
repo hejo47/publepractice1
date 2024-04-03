@@ -1,0 +1,366 @@
+section {
+}
+
+.visual {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+}
+
+.company {
+  > div {
+    padding: {
+      top: 150px;
+      bottom: 150px;
+    }
+    border-bottom: 1px solid #333;
+  }
+  &__list {
+    @include flex-row;
+    justify-content: center;
+    column-gap: 15px;
+  }
+  &__item {
+    width: 40%;
+    &-img {
+      @include flex-row;
+      justify-content: center;
+      width: 100%;
+      padding: 0 30px;
+      svg {
+        height: 100%;
+        max-height: 80px;
+        aspect-ratio: 175 / 101;
+        transition: $transition--default;
+      }
+    }
+    &-txt {
+      @include flex-row;
+      justify-content: center;
+      margin-top: 35px;
+      span {
+        font-size: 13px;
+        text-transform: uppercase;
+        max-width: 14em;
+        text-align: center;
+        font-weight: 500;
+        line-height: 1.4em;
+      }
+    }
+  }
+  a {
+    &:hover {
+      text-decoration: underline;
+      .company__item-img {
+        svg {
+          transform: scale(1.1);
+        }
+      }
+    }
+  }
+}
+
+.product {
+  > div {
+    padding: {
+      top: 70px;
+      bottom: 150px;
+    }
+    border-bottom: 1px solid #333;
+  }
+  &__desc {
+    &-txt {
+      width: 40%;
+      p {
+        font-size: 22px;
+      }
+      a.btn {
+        margin-top: 35px;
+      }
+    }
+    &-logo {
+      @include flex-row;
+      justify-content: flex-end;
+      width: 100%;
+      margin: {
+        top: 80px;
+        bottom: 80px;
+      }
+      svg {
+        width: 45%;
+        max-width: 650px;
+      }
+    }
+  }
+  &__list {
+    @include flex-row;
+    justify-content: center;
+    align-items: flex-start;
+    column-gap: 15px;
+  }
+  &__item {
+    width: calc(100% / 3);
+    a {
+      @include flex-column;
+      justify-content: flex-start;
+      align-items: flex-start;
+      &:hover {
+        text-decoration: underline;
+        .product__item-img {
+          img {
+            transform: scale(1);
+          }
+        }
+      }
+    }
+    &-img {
+      overflow: hidden;
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        aspect-ratio: 100 / 125;
+        transform: scale(1.05);
+        transition: $transition--default;
+      }
+    }
+    &-txt {
+      width: 100%;
+      margin-top: 20px;
+      h3 {
+        font-size: 22px;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+      }
+      p {
+        font-size: 15px;
+        width: 40%;
+        text-transform: uppercase;
+      }
+    }
+  }
+}
+
+.featured {
+  > div {
+  }
+  &__label {
+    @include flex-row;
+    margin-top: 15px;
+    &-col {
+      @include flex-row;
+      width: 35%;
+      &:nth-of-type(2) {
+        width: 65%;
+        justify-content: space-between;
+      }
+      p {
+        font-size: 14px;
+      }
+    }
+  }
+  &__desc {
+    width: 20%;
+    margin: {
+      top: 85px;
+      bottom: 125px;
+    }
+    font-size: 42px;
+    line-height: 1.1em;
+  }
+  &__list {
+    @include flex-row;
+    column-gap: 70px;
+    margin-bottom: 70px;
+  }
+  &__item {
+    width: 100%;
+    max-width: 300px;
+    &-logo {
+      @include position;
+      @include flex-row;
+      justify-content: flex-start;
+      align-items: flex-start;
+      width: 40%;
+      height: 100%;
+      max-height: 80px;
+      padding: {
+        top: 20px;
+        bottom: 20px;
+      }
+      img {
+        height: 100%;
+      }
+      &::after {
+        @include position(a, null, null, 0, 0);
+        width: 20px;
+        height: 2px;
+        background-color: #333;
+        content: "";
+      }
+    }
+    &-txt {
+      margin-top: 100px;
+      h3 {
+        text-transform: uppercase;
+        font-size: 22px;
+        margin-bottom: 20px;
+      }
+      p {
+        width: 95%;
+        font-size: 18px;
+        line-height: 1.4em;
+        a {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}
+
+.about {
+  > div {
+    @include position;
+    @include flex-row;
+    justify-content: flex-end;
+    column-gap: 15px;
+    padding: {
+      top: 150px;
+      bottom: 150px;
+    }
+  }
+  &__txt {
+    width: 45%;
+    height: 100%;
+    h2 {
+      font-size: 84px;
+      width: 87%;
+      line-height: 0.9em;
+    }
+    p {
+      font-size: 18px;
+      margin: {
+        top: 25px;
+        bottom: 70px;
+      }
+      display: block;
+      span {
+        font-weight: 800;
+      }
+    }
+  }
+  &__img {
+    width: 55%;
+    max-height: 950px;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+  }
+}
+
+.news {
+  > div {
+    padding: {
+      bottom: 200px;
+    }
+  }
+  &__desc {
+    @include flex-row;
+    justify-content: space-between;
+    align-items: center;
+    h2 {
+      font-size: 42px;
+      width: 20%;
+      line-height: 1.1em;
+    }
+  }
+  &__list {
+    @include flex-column;
+    row-gap: 80px;
+    margin-top: 40px;
+    height: 100%;
+  }
+  &__item {
+    padding-top: 20px;
+    border-top: 1px solid #333;
+    height: 100%;
+    a {
+      @include flex-row;
+      column-gap: 15px;
+      height: 100%;
+      &:hover {
+        .news__item-img {
+          img {
+            transform: scale(1);
+          }
+        }
+        .news__item-txt {
+          h3 {
+            text-decoration: underline;
+          }
+        }
+        .news__item-arrow {
+          svg {
+            animation: right-move 0.5s ease backwards;
+          }
+        }
+      }
+    }
+    &-img {
+      width: 30%;
+      overflow: hidden;
+      img {
+        width: 100%;
+        height: 100%;
+        transform: scale(1.05);
+        object-fit: cover;
+        object-position: center;
+        transition: $transition--default;
+      }
+    }
+    &-txt {
+      @include flex-column;
+      justify-content: space-between;
+      width: 60%;
+      h3 {
+        font-size: 42px;
+        font-weight: 500;
+        text-transform: uppercase;
+        width: 70%;
+        line-height: 1.1em;
+      }
+      p {
+        font-size: 14px;
+        font-weight: 600;
+        text-transform: uppercase;
+        span {
+          font-weight: 400;
+        }
+      }
+    }
+    &-arrow {
+      @include flex-row;
+      justify-content: flex-end;
+      align-items: flex-start;
+      width: 10%;
+      div {
+        overflow: hidden;
+        width: 100%;
+        max-width: 30px;
+      }
+      svg {
+        max-width: 30px;
+      }
+    }
+  }
+}

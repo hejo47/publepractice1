@@ -1,0 +1,447 @@
+.view {
+    @include position;
+    width: 100%;
+    background-color: #f4f4f4;
+}
+
+.container {
+    width: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+// REMOVABLE CODE START
+// MODAL
+.modal {
+  background-color: #fff;
+  opacity: 0;
+  visibility: hidden;
+  transition: $transition--default;
+  &__wrap {
+    @include flex_row;
+    @include position(f, null, 50%, 50%, 50%);
+    z-index: 2;
+    transform: translate(-50%, 50%);
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    opacity: 0;
+    visibility: hidden;
+    transition: $transition--default;
+    padding: 0 10px;
+    &.active {
+        opacity: 1;
+        visibility: visible;
+        .modal__back {
+            opacity: 1;
+        }
+        .modal {
+            visibility: visible;
+            opacity: 1;
+        }
+    }
+  }
+  &__back {
+      @include position(a, null, 0, 0, 0);
+      z-index: -1;
+      width: 100%;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.55);
+      opacity: 0;
+      transition: $transition--default;
+  }
+}
+
+.select__wrap {
+  @include position;
+  width: 100%;
+  margin: {
+      top: 20px;
+      bottom: 20px;
+  }
+  @at-root .stReg {
+      padding-bottom: 30%;
+  }
+  label {
+      display: block;
+      font-size: 16px;
+      color: gray;
+      margin-bottom: 8px;
+  }
+  &.select__view {
+      display: none;
+      &.on {
+          display: block;
+      }
+  }
+  select {
+      display: none;
+  }
+  .select {
+      @include flex_row;
+      justify-content: flex-start;
+      align-items: center;
+      background: {
+          image: url(/assets_2nd/img/icon/down_arrow.svg);
+          repeat: no-repeat;
+          position: right 2% center;
+          size: 24px;
+      }
+      @at-root .header #{&} {
+          background: {
+              position: right 15px center;
+          }
+      }
+      ~ .select {
+          margin-top: 10px;
+      }
+      ul {
+          @include position(a, 0, 0);
+          @include hidden;
+          width: 100%;
+          height: 0;
+          border-radius: 8px;
+          border: 1px solid $border-color--default;
+          background-color: #FFF;
+          overflow: hidden;
+          z-index: 10;
+      }
+      &.active {
+          ul {
+              @include visible;
+              @include disable_scroll;
+              height: unset;
+              max-height: 210px;
+              overflow-y: scroll;
+          }
+      }
+      &__value {
+          font-weight: 600;
+      }
+      &__item {
+          @include flex_row;
+          justify-content: flex-start;
+          align-items: center;
+          width: 100%;
+          padding: 20px 20px;
+          background-color: #FFF;
+          font-weight: 500;
+          & + .select__item {
+              border-top: 1px solid $border-color--default;
+          }
+          &.selected {
+              @include position;
+              font-weight: 700;
+              &::after {
+                  @include position(a, 50%, 16px);
+                  transform: translateY(-50%);
+                  width: 24px;
+                  height: 24px;
+                  content: "";
+                  background: {
+                      image: url(/assets_2nd/img/icon/check.svg);
+                      repeat: no-repeat;
+                      position: center;
+                      size: contain;
+                  }
+              }
+          }
+      }
+  }
+}
+
+.header {
+    @include position(f, 0, 0);
+    z-index: 999;
+    width: 100%;
+    padding: {
+        top: 50px;
+        bottom: 50px;
+    };
+    animation: fade-in 3s ease forwards;
+    transition: $transition--default;
+    * {
+        color: #FFF;
+    }
+    > div {
+        @include position;
+        @include flex-row;
+        justify-content: center;
+        align-items: center;
+    }
+    &__logo {
+        @include position(a, 50%, null, null, 20px);
+        transform: translateY(-50%);
+        font-size: 30px;
+        font-weight: 800;
+    }
+    &__gnb {
+        @include flex-row;
+        justify-content: center;
+        align-items: center;
+        &-item {
+            padding: {
+                left: 30px;
+                right: 30px;
+            }
+            a {
+                @include position;
+                text-transform: uppercase;
+                font-weight: 600;
+                font-size: 14px;
+                overflow: hidden;
+                display: inline-block;
+                &::after {
+                    @include position(a, null, null, 0, 0);
+                    width: 100%;
+                    height: 1px;
+                    overflow: hidden;
+                    background-color: #FFF;
+                    content: "";
+                    animation: trace-out 0.5s ease forwards;
+                }
+                &:hover {
+                    &::after {
+                        animation: trace-in 0.5s ease forwards;
+                    }
+                }
+            }
+        }
+    }
+    &__menu {
+        @include position(a, 50%, 20px, null, null);
+        transform: translateY(-50%);
+        font-size: 30px;
+        font-weight: 800;
+        width: 20%;
+        height: 100%;
+        max-width: 22px;
+        a {
+            @include flex-row;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            svg {
+                fill: #FFF;
+                transition: $transition--default;
+            }
+            &:hover {
+                svg {
+                    @include flex-row;
+                    justify-content: center;
+                    align-items: center;
+                    transform: scale(1.2);
+                }
+            }
+        }
+    }
+    &.active {
+        background-color: #f4f4f4;
+        box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.03);
+        * {
+            color: #333;
+            fill: #333;
+        }
+        .header__gnb-item {
+            a {
+                &::after {
+                    background-color: #333;
+                }
+            }
+        }
+        
+    }
+}
+
+.mouse__cursor {
+    @include flex_row;
+    @include position(a, 20px, 0, 0, 0);
+    justify-content: center;
+    align-items: center;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: $point-color--default;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+
+.btn {
+    @include position;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    border-radius: 20px;
+    padding: 8px 30px;
+    font-weight: 800;
+    border: 1px solid #333;
+    overflow: hidden;
+    transition: $transition--default;
+    text-transform: uppercase;
+    &::after {
+        @include position(a, null, 0, 0, 0);
+        @include flex-row;
+        z-index: -1;
+        justify-items: center;
+        align-content: flex-end;
+        width: 100%;
+        height: 0%;
+        background-color: #333;
+        transition: $transition--default;
+        content: "";
+        animation: paint-down 0.5s ease forwards;
+    }
+    &:hover {
+        color: #FFF;
+        &::after {
+            animation: paint-up 0.5s ease forwards;
+        }
+    }
+}
+
+.footer {
+    background-color: #252422;
+    padding: {
+        top: 120px;
+    }
+    * {
+        color: #FFF;
+    }
+    > .container {
+        padding: {
+            bottom: 120px;
+        }
+    }
+    &__desc {
+        @include flex-row;
+        justify-content: space-between;
+        column-gap: 15px;
+        width: 100%;
+    }
+    &__logo {
+        width: 50%;
+        svg {
+            width: 100%;
+            max-width: 70px;
+            fill: #FFF;
+        }
+    }
+    &__contact {
+        width: 50%;
+        p {
+            font-size: 32px;
+            width: 70%;
+            font-weight: 600;
+            a {
+                text-decoration: underline;
+            }
+        }
+    }
+    &__menu {
+        @include flex-row;
+        justify-content: space-between;
+        column-gap: 15px;
+        width: 100%;
+        margin-top: 90px;
+    }
+    &__title {
+        @include position;
+        padding-left: 22px;
+        text-transform: uppercase;
+        font-size: 18px;
+        &::before {
+            @include position(a, 50%, null, null, 0);
+            transform: translateY(-50%);
+            border-radius: 50%;
+            width: 13px;
+            height: 13px;
+            background-color: #fff;
+            content: "";
+        }
+    }
+    &__email {
+        width: 50%;
+        margin-top: 8px;
+        > div {
+            @include position;
+            width: 75%;
+        }
+        input {
+            width: 100%;
+            background-color: transparent;
+            outline: none;
+            box-shadow: none;
+            border: none;
+            border-bottom: 1px solid #FFF;
+            padding: {
+                top: 18px;
+                bottom: 18px;
+            };
+            font-size: 18px;
+            &::placeholder {
+                color: #FFF;
+                font-weight: 300;
+            }
+        }
+        button {
+            @include position(a, 50%, 0, null, null);
+            transform: translateY(-50%);
+            width: 20%;
+            max-width: 18px;
+            background-color: transparent;
+            border: none;
+            svg {
+                fill: #FFF;
+            }
+        }
+    }
+    &__link {
+        @include flex-row;
+        width: 50%;
+    }
+    &__item {
+        width: calc(100% / 3);
+        ul {
+            @include flex-column;
+            row-gap: 3px;
+            margin-top: 25px;
+            li {
+                a {
+                    font-size: 18px;
+                    font-weight: 300;
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+            }
+        }
+    }
+    &__copy {
+        background-color: #191918;
+        padding: {
+            top: 25px;
+            bottom: 25px;
+        };
+        > .container {
+            @include flex-row;
+            justify-content: space-between;
+            align-items: center;
+            p {
+                font-size: 11px;
+                color: #5E5E5E;
+                a {
+                    span {
+                        color: #5E5E5E;
+                        font-weight: 600;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+

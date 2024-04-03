@@ -1,0 +1,112 @@
+// EXAMPLE
+// IF, ELSE, ELSE IF
+@mixin question($size, $circle: false) {
+  width: $size;
+  height: $size;
+  @if $circle {
+    border-radius: $size / 2;
+  }
+}
+.class {
+  @include question(100px, $circle: true);
+}
+// FOR
+@for $i from 1 through 5 {
+  .class:nth-of-type(#{$i}) {
+    background-image: url('/img/background#{$i}.png');
+  }
+}
+// EACH
+$color__List: #222 #333 #444;
+@each $color in $color__List {
+  $i: index($color__List, $color); // index -> list의 내장함수
+  .class:nth-of-type(#{$i}) {
+    background-color: $color;
+  }
+}
+// FUNCTION
+@function pow($base, $exponent) {
+  $result: 1;
+  @for $_ from 1 through $exponent {
+    $result: $result * $base;
+  }
+  @return $result;
+}
+.class {
+  margin-left: pow(4, 3) * 1px;
+}
+// 내장 함수
+// LIGHTEN
+.func__lighten {
+  background-color: lighten(color, amount);
+  // 색상 밝기 조절(높게)
+}
+// DARKEN
+.func__darken {
+  background-color: darken(color, amount);
+  // 색상 밝기 조절(낮게)
+}
+// MIX
+.func__mix {
+  background-color: mix(color1, color2, weight);
+  // 두 개의 색상을 섞어서 새로운 색상을 만듦
+}
+// MAX
+.func__max {
+  width: max(number, number, number___);
+  // 괄호에 넣은 값 중에 가장 큰 수 반환
+}
+// MIN
+.func__min {
+  width: min(number, number, number___);
+  // 괄호에 넣은 값 중에 가장 작은 수 반환
+}
+// PARCENTAGE
+.func__parcentage {
+  width: parcentage(number);
+  // 퍼센트로 숫자 변경
+}
+// COMPARABLE
+.func__comparable {
+  width: comparable(num1, num2);
+  // num1 과 num2 가 비교 가능한 지 확인 후 true, false 값을 반환
+}
+// INSERT
+.func__insert {
+  width: srt-insert(string, insert, index);
+  // 문자열에 원하는 위치(index)에 문자(insert)를 넣은 후, 새로운 문자열을 반환
+}
+// INDEX
+.func__index {
+  width: srt-index(string, substring);
+  // 문자열에서 해당 문자의 index를 반환
+}
+// UPPERCASE
+.func__upper {
+  content: to-upper-case(string);
+  // 문자열 전부를 대문자로 변경
+}
+// LOWERCASE
+.func__lower {
+  content: to-lower-case(string);
+  // 문자열 전부를 소문자로 변경
+}
+// UNIT
+.func__unit {
+  width: unit(number);
+  // 숫자의 단위를 반환
+}
+// UNITLESS
+.func__unitless {
+  width: unitless(number);
+  // 단위를 갖고 있는지 판단해 true, false 값을 반환
+}
+// VARIABLE EXISTS
+.func__exists {
+  width: variable-exists(name);
+  // 변수가 현재 범위에 존재하는지 판단해 true, false 값을 반환, 인수는 $ 없이 사용
+}
+
+
+
+ 
